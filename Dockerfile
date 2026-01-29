@@ -1,6 +1,6 @@
-FROM oven/bun:alpine
+FROM oven/bun:1.3.7-debian
 
-RUN apk add --no-cache nginx docker-cli
+RUN apt-get update && apt-get install -y nginx docker.io && rm -rf /var/lib/apt/lists/*
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY index.html /usr/share/nginx/html/index.html

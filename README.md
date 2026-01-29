@@ -6,20 +6,20 @@ A simple [snowflake](https://snowflake.torproject.org/) dashboard to portray run
 
 ## Installation
 
-1.Clone this repository:
+- Clone this repository:
 
 ```bash
 git clone https://github.com/lone-cloud/snowflake-dashboard.git
 cd snowflake-dashboard
 ```
 
-2.Start the services:
+- Start the services:
 
 ```bash
 docker compose up -d
 ```
 
-3.Open the dashboard in your browser:
+- Open the dashboard in your browser:
 
 ```plaintext
 http://localhost:8888
