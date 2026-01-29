@@ -1,6 +1,7 @@
 services:
   snowflake-dashboard:
-    build: .
+    container_name: snowflake-dashboard
+    image: ghcr.io/lone-cloud/snowflake-dashboard:latest
     restart: unless-stopped
     network_mode: host
     volumes:
@@ -9,6 +10,7 @@ services:
       - snowflake-proxy
 
   snowflake-proxy:
+    container_name: snowflake-proxy
     image: containers.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake:latest
     restart: unless-stopped
     network_mode: host

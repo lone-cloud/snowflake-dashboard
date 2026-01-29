@@ -1,11 +1,12 @@
 {
 	"name": "snowflake-dashboard",
-	"version": "1.0.0",
+	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
 		"dev": "bun dev-server.js",
 		"check": "biome check .",
-		"fix": "biome check --write --unsafe ."
+		"fix": "biome check --write --unsafe .",
+		"release": "gh workflow run release.yml"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.3.13"
