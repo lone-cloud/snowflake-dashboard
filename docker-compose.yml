@@ -1,19 +1,15 @@
 services:
-  snowflake-proxy:
-    image: containers.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake:latest
-    container_name: snowflake-proxy
+  snowflake-dashboard:
+    build: .
     restart: unless-stopped
     network_mode: host
-    command: ["-verbose", "-metrics", "-metrics-address", "0.0.0.0", "-metrics-port", "9999"]
-
-  stats-dashboard:
-    image: nginx:alpine
-    container_name: snowflake-stats
-    restart: unless-stopped
-    ports:
-      - "8888:8888"
     volumes:
-      - ./index.html:/usr/share/nginx/html/index.html:ro
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
       - snowflake-proxy
+
+  snowflake-proxy:
+    image: containers.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake:latest
+    restart: unless-stopped
+    network_mode: host
+    command: ["-metrics", "-metrics-address", "0.0.0.0", "-metrics-port", "9999"]

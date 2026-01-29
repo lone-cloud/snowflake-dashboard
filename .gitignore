@@ -1,13 +1,3 @@
-# Docker
 .env
-
-# OS
+node_modules
 .DS_Store
-Thumbs.db
-
-# Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
