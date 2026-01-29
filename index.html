@@ -115,7 +115,8 @@
                     if (!match) return '';
                     
                     const [, timestamp, connections, dlTotal, dlRate, ulTotal, ulRate] = match;
-                    const time = timestamp.split(' ')[1];
+                    const utcDate = new Date(`${timestamp.replace(/\//g, '-')}Z`);
+                    const time = utcDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
                     
                     return `<tr>
                         <td>${time}</td>
