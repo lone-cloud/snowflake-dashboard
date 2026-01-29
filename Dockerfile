@@ -1,6 +1,6 @@
-FROM oven/bun:1.3.7-debian
+FROM node:alpine
 
-RUN apt-get update && apt-get install -y nginx docker.io && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache nginx docker-cli
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY index.html /usr/share/nginx/html/index.html
@@ -10,7 +10,7 @@ COPY logs-server.js /app/logs-server.js
 
 RUN echo '#!/bin/sh' > /start.sh && \
     echo 'nginx' >> /start.sh && \
-    echo 'cd /app && bun logs-server.js' >> /start.sh && \
+    echo 'cd /app && node logs-server.js' >> /start.sh && \
     chmod +x /start.sh
 
 EXPOSE 8888
