@@ -35,9 +35,16 @@ body {
 
 .grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	gap: 20px;
 	margin-bottom: 20px;
+}
+
+.grid-top {
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-bottom {
+	grid-template-columns: 1fr 1fr;
 }
 
 .stat {
@@ -110,11 +117,56 @@ tr:last-child td {
 	color: var(--success-color);
 }
 
-.fail-rate {
-	color: var(--error-color);
-}
-
 .flag {
 	font-size: 20px;
 	margin-right: 8px;
+}
+
+.left-column {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+@media (max-width: 768px) {
+	body {
+		padding: 10px;
+	}
+
+	.grid {
+		gap: 15px;
+	}
+
+	.grid-bottom {
+		grid-template-columns: 1fr;
+	}
+
+	.stat {
+		padding: 20px;
+	}
+
+	.big {
+		font-size: 36px;
+	}
+
+	.label {
+		font-size: 12px;
+	}
+
+	th,
+	td {
+		padding: 8px 4px;
+		font-size: 13px;
+	}
+
+	.metric-row {
+		flex-direction: column;
+		gap: 4px;
+		align-items: flex-start;
+	}
+
+	.metric-row span:last-child {
+		font-size: 14px;
+		font-weight: 600;
+	}
 }

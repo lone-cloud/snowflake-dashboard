@@ -2,7 +2,9 @@
 
 A simple [snowflake](https://snowflake.torproject.org/) dashboard to portray runtime metrics.
 
-[Dashboard Preview Coming Soon]
+The dashboard is build using data from snowflake's /internal/metrics endpoint to get the totals as well as its docker logs to get its hourly totals.
+
+![Dashboard Preview](screenshot.webp)
 
 ## Installation
 
@@ -22,4 +24,13 @@ Open the dashboard in your browser:
 
 ```plaintext
 http://localhost:8888
+```
+
+## Updating
+
+Pull the latest image and restart:
+
+```bash
+docker compose pull
+docker compose up -d
 ```

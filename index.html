@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snowflake Dashboard</title>
     <meta http-equiv="refresh" content="60">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="grid grid-top">
         <div class="stat">
             <div class="label">Total Connections</div>
             <div class="big" id="total">-</div>
@@ -23,8 +24,8 @@
         </div>
     </div>
 
-    <div class="grid" style="grid-template-columns: 1fr 1fr;">
-        <div style="display: flex; flex-direction: column; gap: 20px;">
+    <div class="grid grid-bottom">
+        <div class="left-column">
             <div class="stat">
                 <div class="label">Network Stats</div>
                 <div class="metric-row">
