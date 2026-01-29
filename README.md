@@ -2,7 +2,7 @@
 
 A simple [snowflake](https://snowflake.torproject.org/) dashboard to portray runtime metrics.
 
-![Dashboard Preview](https://via.placeholder.com/800x400?text=Snowflake+Stats+Dashboard)
+[Dashboard Preview Coming Soon]
 
 ## Installation
 
