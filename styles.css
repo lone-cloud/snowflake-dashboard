@@ -98,6 +98,10 @@ tr:hover {
 	background: var(--bg-hover);
 }
 
+tr:last-child td {
+	border-bottom: none;
+}
+
 .error {
 	color: var(--error-color);
 }

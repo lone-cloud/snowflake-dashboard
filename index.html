@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Snowflake Dashboard</title>
@@ -117,9 +117,10 @@
                     const [, timestamp, connections, dlTotal, dlRate, ulTotal, ulRate] = match;
                     const utcDate = new Date(`${timestamp.replace(/\//g, '-')}Z`);
                     const time = utcDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                    const fullDate = utcDate.toLocaleString();
                     
                     return `<tr>
-                        <td>${time}</td>
+                        <td title="${fullDate}">${time}</td>
                         <td>${connections}</td>
                         <td>${formatKB(dlTotal)} <span style="color: var(--text-secondary); font-size: 12px;">(${formatKB(dlRate)}/s)</span></td>
                         <td>${formatKB(ulTotal)} <span style="color: var(--text-secondary); font-size: 12px;">(${formatKB(ulRate)}/s)</span></td>
