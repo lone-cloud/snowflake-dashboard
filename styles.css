@@ -202,13 +202,10 @@ tr:last-child td {
 	font-size: 13px;
 }
 
-.activity-table tr {
+.activity-table th {
 	color: var(--text-secondary);
 	font-size: 11px;
 	text-transform: uppercase;
-}
-
-.activity-table th {
 	text-align: left;
 	padding: 8px 4px;
 }
