@@ -1,9 +1,18 @@
 const http = require("node:http");
 const { spawn } = require("node:child_process");
 
+function getPath(req) {
+	try {
+		return new URL(req.url, "http://localhost").pathname;
+	} catch {
+		return req.url;
+	}
+}
+
 http
-	.createServer((_req, res) => {
-		const proc = spawn("docker", ["logs", "--tail", "100", "snowflake-proxy"]);
+	.createServer((req, res) => {
+		const path = getPath(req);
+		const proc = spawn("docker", ["logs", "--tail", "500", "snowflake-proxy"]);
 
 		let output = "";
 		proc.stdout.on("data", (data) => {
@@ -14,13 +23,32 @@ http
 		});
 
 		proc.on("close", () => {
-			const logs = output
-				.split("\n")
-				.filter((line) => line.includes("In the last"))
-				.join("\n");
+			if (path === "/internal/nat") {
+				const natMatch = output
+					.split("\n")
+					.reverse()
+					.map((line) => line.match(/\bNAT type:\s*([^\r\n]+)\s*$/))
+					.find(Boolean);
 
-			res.writeHead(200, { "Content-Type": "text/plain" });
-			res.end(logs);
+				const natType = natMatch?.[1]?.trim() || "Unknown";
+				res.writeHead(200, { "Content-Type": "text/plain" });
+				res.end(natType);
+				return;
+			}
+
+			if (path === "/internal/logs" || path === "/") {
+				const logs = output
+					.split("\n")
+					.filter((line) => line.includes("In the last"))
+					.join("\n");
+
+				res.writeHead(200, { "Content-Type": "text/plain" });
+				res.end(logs);
+				return;
+			}
+
+			res.writeHead(404, { "Content-Type": "text/plain" });
+			res.end("Not Found");
 		});
 
 		proc.on("error", () => {

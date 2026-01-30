@@ -36,6 +36,10 @@
                     <span>Tor Relay In / Out</span>
                     <span id="tor-traffic">-</span>
                 </div>
+                <div class="metric-row" id="nat-row" hidden>
+                    <span>NAT Type</span>
+                    <span id="nat-type">-</span>
+                </div>
                 <div class="metric-row">
                     <span>Memory Usage</span>
                     <span id="memory">-</span>
@@ -56,9 +60,11 @@
         
         <div class="stat">
             <div class="label">Connections by Country</div>
-            <table id="countries">
-                <tr><th>Country</th><th>Count</th></tr>
-            </table>
+            <div class="table-scroll">
+                <table id="countries">
+                    <tr><th>Country</th><th>Count</th></tr>
+                </table>
+            </div>
         </div>
     </div>
     
@@ -79,13 +85,27 @@
             if (hours > 0) return `${hours}h ${mins}m`;
             return `${mins}m`;
         }
-        
+
+        const regionNames = (typeof Intl !== 'undefined' && Intl.DisplayNames)
+            ? new Intl.DisplayNames([navigator.language || 'en'], { type: 'region' })
+            : null;
+
+        function getCountryName(countryCode) {
+            if (!countryCode || countryCode === 'Unknown') return 'Unknown';
+            const normalized = String(countryCode).trim().toUpperCase();
+            if (!normalized) return 'Unknown';
+
+            const name = regionNames?.of(normalized);
+            return name || normalized;
+        }
+
         function getFlag(countryCode) {
             if (!countryCode || countryCode === 'Unknown') return '🌐';
-            const codePoints = countryCode
-                .toUpperCase()
+            const normalized = String(countryCode).trim().toUpperCase();
+            if (normalized.length !== 2) return '🌐';
+            const codePoints = normalized
                 .split('')
-                .map(char => 127397 + char.charCodeAt());
+                .map(char => 127397 + char.charCodeAt(0));
             return String.fromCodePoint(...codePoints);
         }
         
@@ -118,7 +138,7 @@
                     const [, timestamp, connections, dlTotal, dlRate, ulTotal, ulRate] = match;
                     const utcDate = new Date(`${timestamp.replace(/\//g, '-')}Z`);
                     const time = utcDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-                    const fullDate = utcDate.toLocaleString();
+                    const fullDate = utcDate.toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
                     
                     return `<tr>
                         <td title="${fullDate}">${time}</td>
@@ -139,6 +159,28 @@
                 </table>`;
             } catch (_e) {
                 document.getElementById('activity-log').innerHTML = '<div style="color: var(--error-color);">Error loading logs</div>';
+            }
+        }
+
+        async function fetchNatType() {
+            try {
+                const response = await fetch('/internal/nat');
+                const text = await response.text();
+                const natType = text.trim() || 'Unknown';
+                const el = document.getElementById('nat-type');
+                const row = document.getElementById('nat-row');
+
+                const isUnknown = !natType || natType.toLowerCase() === 'unknown';
+                if (row) row.hidden = isUnknown;
+                if (el && !isUnknown) {
+                    const capitalized = natType.charAt(0).toUpperCase() + natType.slice(1).toLowerCase();
+                    el.textContent = capitalized;
+                }
+            } catch (_e) {
+                const el = document.getElementById('nat-type');
+                const row = document.getElementById('nat-row');
+                if (row) row.hidden = false;
+                if (el) el.innerHTML = '<span class="error">Error</span>';
             }
         }
         
@@ -211,9 +253,15 @@
                 table.innerHTML = '<tr><th>Country</th><th>Count</th></tr>';
                 Object.entries(countries).sort((a, b) => b[1] - a[1]).forEach(([country, count]) => {
                     const row = table.insertRow();
-                    const flag = getFlag(country);
-                    const displayName = country || 'Unknown';
-                    row.insertCell(0).innerHTML = `<span class="flag">${flag}</span>${displayName}`;
+                    const displayName = getCountryName(country);
+
+                    const countryCell = row.insertCell(0);
+                    const flagSpan = document.createElement('span');
+                    flagSpan.className = 'flag';
+                    flagSpan.textContent = getFlag(country);
+                    countryCell.appendChild(flagSpan);
+                    countryCell.appendChild(document.createTextNode(displayName));
+
                     row.insertCell(1).textContent = count;
                 });
             } catch (_e) {
@@ -223,8 +271,10 @@
         
         fetchStats();
         fetchLogs();
+        fetchNatType();
         setInterval(fetchStats, 60000);
         setInterval(fetchLogs, 60000);
+        setInterval(fetchNatType, 60000);
     </script>
 </body>
 </html>

@@ -63,6 +63,7 @@ const server = Bun.serve({
 
 		if (url.pathname === "/internal/logs") {
 			const mockLogs = `2026/01/29 06:36:23 In the last 1h0m0s, there were 28 completed successful connections. Traffic Relayed ↓ 198456 KB (55.13 KB/s), ↑ 38921 KB (10.81 KB/s).
+2026/01/29 18:36:39 NAT type: restricted
 2026/01/29 05:36:23 In the last 1h0m0s, there were 35 completed successful connections. Traffic Relayed ↓ 251032 KB (69.73 KB/s), ↑ 47852 KB (13.29 KB/s).
 2026/01/29 04:36:23 In the last 1h0m0s, there were 42 completed successful connections. Traffic Relayed ↓ 312847 KB (86.90 KB/s), ↑ 59234 KB (16.45 KB/s).
 2026/01/29 03:36:23 In the last 1h0m0s, there were 31 completed successful connections. Traffic Relayed ↓ 221543 KB (61.54 KB/s), ↑ 41876 KB (11.63 KB/s).
@@ -83,6 +84,12 @@ const server = Bun.serve({
 2026/01/28 12:36:23 In the last 1h0m0s, there were 26 completed successful connections. Traffic Relayed ↓ 182347 KB (50.65 KB/s), ↑ 34298 KB (9.53 KB/s).
 2026/01/28 11:36:23 In the last 1h0m0s, there were 51 completed successful connections. Traffic Relayed ↓ 367891 KB (102.19 KB/s), ↑ 69123 KB (19.20 KB/s).`;
 			return new Response(mockLogs, {
+				headers: { "Content-Type": "text/plain" },
+			});
+		}
+
+		if (url.pathname === "/internal/nat") {
+			return new Response("restricted", {
 				headers: { "Content-Type": "text/plain" },
 			});
 		}
