@@ -8,7 +8,7 @@
 	--accent-color: #58a6ff;
 	--success-color: #3fb950;
 	--error-color: #f85149;
-	--bottom-grid-height: clamp(700px, 85vh, 1000px);
+	--bottom-grid-height: clamp(43.75rem, 85vh, 62.5rem);
 	--scrollbar-track: rgba(255, 255, 255, 0.04);
 	--scrollbar-thumb: rgba(201, 209, 217, 0.22);
 	--scrollbar-thumb-hover: rgba(201, 209, 217, 0.35);
@@ -33,17 +33,17 @@
 
 body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-	max-width: 1200px;
+	max-width: 75rem;
 	margin: 0 auto;
-	padding: 20px;
+	padding: 1rem 2rem;
 	background: var(--bg-primary);
 	color: var(--text-primary);
 }
 
 .grid {
 	display: grid;
-	gap: 20px;
-	margin-bottom: 20px;
+	gap: 1rem;
+	margin-bottom: 1rem;
 }
 
 .grid-top {
@@ -53,35 +53,49 @@ body {
 .grid-bottom {
 	grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
 	align-items: stretch;
+	margin-bottom: 0;
 }
 
 .stat {
 	background: var(--bg-secondary);
-	padding: 30px;
-	border-radius: 12px;
+	padding: 1.875rem;
+	border-radius: 0.75rem;
 	border: 1px solid var(--border-color);
 }
 
 .big {
-	font-size: 48px;
+	font-size: 3rem;
 	font-weight: bold;
 	color: var(--accent-color);
-	margin-top: 10px;
+	margin-top: 0.625rem;
 }
 
 .label {
 	color: var(--text-secondary);
-	font-size: 14px;
+	font-size: 0.875rem;
 	text-transform: uppercase;
-	letter-spacing: 1px;
-	margin-bottom: 15px;
+	letter-spacing: 0.0625em;
+	margin-bottom: 0.9375rem;
 }
 
 .metric-row {
-	display: flex;
-	justify-content: space-between;
-	padding: 8px 0;
+	display: grid;
+	grid-template-columns: minmax(auto, 11.25rem) auto;
+	gap: 5rem;
+	padding: 0.5em 0;
 	border-bottom: 1px solid var(--border-color);
+}
+
+.metric-row > span:first-child {
+	color: var(--text-secondary);
+	font-size: 0.8125rem;
+	text-transform: uppercase;
+	letter-spacing: 0.03125em;
+}
+
+.metric-row > span:last-child {
+	font-weight: 600;
+	font-size: 0.9375rem;
 }
 
 .metric-row:last-child {
@@ -90,14 +104,12 @@ body {
 
 table {
 	width: 100%;
-	margin-top: 20px;
 	border-collapse: collapse;
 }
 
 .table-scroll {
 	overflow: auto;
 	scrollbar-gutter: stable;
-	margin-top: 20px;
 }
 
 .table-scroll,
@@ -108,8 +120,8 @@ table {
 
 .table-scroll::-webkit-scrollbar,
 #activity-log::-webkit-scrollbar {
-	width: 10px;
-	height: 10px;
+	width: 0.625rem;
+	height: 0.625rem;
 }
 
 .table-scroll::-webkit-scrollbar-track,
@@ -144,7 +156,7 @@ table {
 
 th,
 td {
-	padding: 12px;
+	padding: 0.75rem;
 	text-align: left;
 	border-bottom: 1px solid var(--border-color);
 }
@@ -154,7 +166,7 @@ th {
 	color: var(--text-secondary);
 	font-weight: 600;
 	text-transform: uppercase;
-	font-size: 12px;
+	font-size: 0.75rem;
 }
 
 tr:hover {
@@ -174,21 +186,20 @@ tr:last-child td {
 }
 
 .flag {
-	font-size: 20px;
-	margin-right: 8px;
+	font-size: 1.25rem;
+	margin-right: 0.5rem;
 }
 
 .left-column {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 1rem;
 }
 
 #activity-log {
 	font-family: "Courier New", monospace;
-	font-size: 13px;
+	font-size: 0.8125rem;
 	line-height: 1.8;
-	margin-top: 15px;
 }
 
 #activity-log .loading {
@@ -197,17 +208,17 @@ tr:last-child td {
 
 .activity-table {
 	width: 100%;
-	margin-top: 10px;
+	margin-top: 0.625rem;
 	font-family: "Courier New", monospace;
-	font-size: 13px;
+	font-size: 0.8125rem;
 }
 
 .activity-table th {
 	color: var(--text-secondary);
-	font-size: 11px;
+	font-size: 0.6875rem;
 	text-transform: uppercase;
 	text-align: left;
-	padding: 8px 4px;
+	padding: 0.5rem 0.25rem;
 }
 
 @media (min-width: 769px) {
@@ -253,16 +264,16 @@ tr:last-child td {
 
 @media (max-width: 768px) {
 	body {
-		padding: 10px;
+		padding: 0.25rem 0.625rem;
 	}
 
 	.grid {
-		gap: 10px;
-		margin-bottom: 10px;
+		gap: 0.625rem;
+		margin-bottom: 0.625rem;
 	}
 
 	.left-column {
-		gap: 10px;
+		gap: 0.625rem;
 	}
 
 	.grid-bottom {
@@ -271,21 +282,21 @@ tr:last-child td {
 	}
 
 	.stat {
-		padding: 15px;
+		padding: 0.9375rem;
 	}
 
 	.big {
-		font-size: 32px;
+		font-size: 2rem;
 	}
 
 	.label {
-		font-size: 12px;
+		font-size: 0.75rem;
 	}
 
 	th,
 	td {
-		padding: 8px 4px;
-		font-size: 13px;
+		padding: 0.5rem 0.25rem;
+		font-size: 0.8125rem;
 	}
 
 	.metric-row {
@@ -293,10 +304,10 @@ tr:last-child td {
 	}
 
 	#activity-log {
-		max-height: clamp(250px, 35vh, 400px);
+		max-height: clamp(15.625rem, 35vh, 25rem);
 	}
 
 	.table-scroll {
-		max-height: clamp(350px, 55vh, 550px);
+		max-height: clamp(21.875rem, 55vh, 34.375rem);
 	}
 }

@@ -4,7 +4,13 @@ A simple [snowflake](https://snowflake.torproject.org/) dashboard to portray run
 
 The dashboard is build using data from snowflake's /internal/metrics endpoint to get the totals as well as its docker logs to get its hourly totals.
 
-![Dashboard Preview](screenshot.webp)
+## Light Mode
+
+<img src="screenshot.webp" alt="Dashboard Preview" width="600" />
+
+## Dark Mode
+
+<img src="screenshot-dark.webp" alt="Dashboard Preview Dark" width="600" />
 
 ## Installation
 

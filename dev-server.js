@@ -1,81 +1,85 @@
 const mockMetrics = `# HELP tor_snowflake_proxy_connection_timeouts_total The total number of client connection attempts that failed after successful rendezvous
 # TYPE tor_snowflake_proxy_connection_timeouts_total counter
-tor_snowflake_proxy_connection_timeouts_total 603
+tor_snowflake_proxy_connection_timeouts_total 765
 # HELP tor_snowflake_proxy_connections_total The total number of successful connections handled by the snowflake proxy
 # TYPE tor_snowflake_proxy_connections_total counter
-tor_snowflake_proxy_connections_total{country=""} 39
+tor_snowflake_proxy_connections_total{country=""} 46
 tor_snowflake_proxy_connections_total{country="??"} 1
 tor_snowflake_proxy_connections_total{country="AE"} 4
 tor_snowflake_proxy_connections_total{country="AU"} 3
-tor_snowflake_proxy_connections_total{country="BF"} 2
+tor_snowflake_proxy_connections_total{country="BF"} 3
 tor_snowflake_proxy_connections_total{country="BR"} 1
 tor_snowflake_proxy_connections_total{country="BY"} 1
-tor_snowflake_proxy_connections_total{country="CA"} 3
+tor_snowflake_proxy_connections_total{country="CA"} 4
 tor_snowflake_proxy_connections_total{country="CH"} 2
 tor_snowflake_proxy_connections_total{country="CI"} 5
 tor_snowflake_proxy_connections_total{country="CM"} 1
-tor_snowflake_proxy_connections_total{country="CN"} 7
+tor_snowflake_proxy_connections_total{country="CN"} 8
 tor_snowflake_proxy_connections_total{country="CV"} 1
 tor_snowflake_proxy_connections_total{country="DE"} 8
-tor_snowflake_proxy_connections_total{country="DK"} 2
-tor_snowflake_proxy_connections_total{country="EG"} 4
-tor_snowflake_proxy_connections_total{country="ES"} 5
+tor_snowflake_proxy_connections_total{country="DK"} 3
+tor_snowflake_proxy_connections_total{country="EG"} 8
+tor_snowflake_proxy_connections_total{country="ES"} 6
+tor_snowflake_proxy_connections_total{country="FI"} 1
 tor_snowflake_proxy_connections_total{country="FR"} 7
 tor_snowflake_proxy_connections_total{country="GA"} 1
-tor_snowflake_proxy_connections_total{country="GB"} 6
+tor_snowflake_proxy_connections_total{country="GB"} 7
 tor_snowflake_proxy_connections_total{country="GM"} 1
 tor_snowflake_proxy_connections_total{country="IE"} 1
-tor_snowflake_proxy_connections_total{country="IN"} 2
-tor_snowflake_proxy_connections_total{country="IR"} 66
-tor_snowflake_proxy_connections_total{country="KE"} 2
+tor_snowflake_proxy_connections_total{country="IL"} 1
+tor_snowflake_proxy_connections_total{country="IN"} 4
+tor_snowflake_proxy_connections_total{country="IR"} 84
+tor_snowflake_proxy_connections_total{country="KE"} 3
 tor_snowflake_proxy_connections_total{country="LT"} 1
 tor_snowflake_proxy_connections_total{country="LY"} 1
-tor_snowflake_proxy_connections_total{country="MA"} 8
-tor_snowflake_proxy_connections_total{country="MU"} 26
+tor_snowflake_proxy_connections_total{country="MA"} 9
+tor_snowflake_proxy_connections_total{country="MU"} 33
 tor_snowflake_proxy_connections_total{country="MW"} 1
-tor_snowflake_proxy_connections_total{country="NG"} 5
-tor_snowflake_proxy_connections_total{country="NL"} 3
+tor_snowflake_proxy_connections_total{country="NG"} 6
+tor_snowflake_proxy_connections_total{country="NL"} 4
+tor_snowflake_proxy_connections_total{country="PK"} 1
 tor_snowflake_proxy_connections_total{country="PL"} 2
-tor_snowflake_proxy_connections_total{country="RU"} 114
-tor_snowflake_proxy_connections_total{country="SD"} 3
+tor_snowflake_proxy_connections_total{country="RU"} 140
+tor_snowflake_proxy_connections_total{country="RW"} 1
+tor_snowflake_proxy_connections_total{country="SD"} 5
 tor_snowflake_proxy_connections_total{country="SG"} 1
 tor_snowflake_proxy_connections_total{country="SO"} 1
-tor_snowflake_proxy_connections_total{country="TG"} 1
-tor_snowflake_proxy_connections_total{country="TM"} 3
-tor_snowflake_proxy_connections_total{country="TN"} 16
+tor_snowflake_proxy_connections_total{country="TG"} 3
+tor_snowflake_proxy_connections_total{country="TM"} 4
+tor_snowflake_proxy_connections_total{country="TN"} 21
 tor_snowflake_proxy_connections_total{country="TZ"} 1
 tor_snowflake_proxy_connections_total{country="UA"} 2
-tor_snowflake_proxy_connections_total{country="UG"} 3
-tor_snowflake_proxy_connections_total{country="US"} 343
-tor_snowflake_proxy_connections_total{country="ZA"} 5
+tor_snowflake_proxy_connections_total{country="UG"} 5
+tor_snowflake_proxy_connections_total{country="US"} 445
+tor_snowflake_proxy_connections_total{country="ZA"} 8
 tor_snowflake_proxy_connections_total{country="ZM"} 7
 # HELP tor_snowflake_proxy_traffic_inbound_bytes_total The total in bound traffic by the snowflake proxy (KB)
 # TYPE tor_snowflake_proxy_traffic_inbound_bytes_total counter
-tor_snowflake_proxy_traffic_inbound_bytes_total 2.93499e+06
+tor_snowflake_proxy_traffic_inbound_bytes_total 3.226803e+06
 # HELP tor_snowflake_proxy_traffic_outbound_bytes_total The total out bound traffic by the snowflake proxy (KB)
 # TYPE tor_snowflake_proxy_traffic_outbound_bytes_total counter
-tor_snowflake_proxy_traffic_outbound_bytes_total 607727
+tor_snowflake_proxy_traffic_outbound_bytes_total 672663
 # HELP process_network_receive_bytes_total Number of bytes received by the process over the network
 # TYPE process_network_receive_bytes_total counter
-process_network_receive_bytes_total 5.257260631e+09
+process_network_receive_bytes_total 6.066517003e+09
 # HELP process_network_transmit_bytes_total Number of bytes sent by the process over the network
 # TYPE process_network_transmit_bytes_total counter
-process_network_transmit_bytes_total 5.290697185e+09
+process_network_transmit_bytes_total 6.091533673e+09
 # HELP process_resident_memory_bytes Resident memory size in bytes
 # TYPE process_resident_memory_bytes gauge
-process_resident_memory_bytes 1.01015552e+08
+process_resident_memory_bytes 1.02674432e+08
 # HELP process_start_time_seconds Start time of the process since unix epoch in seconds
 # TYPE process_start_time_seconds gauge
 process_start_time_seconds 1.76976251641e+09
 # HELP go_goroutines Number of goroutines that currently exist
 # TYPE go_goroutines gauge
-go_goroutines 491
+go_goroutines 416
 # HELP process_open_fds Number of open file descriptors
 # TYPE process_open_fds gauge
-process_open_fds 50
+process_open_fds 47
 # HELP process_cpu_seconds_total Total user and system CPU time spent in seconds
 # TYPE process_cpu_seconds_total counter
-process_cpu_seconds_total 4483.53
+process_cpu_seconds_total 5244.22
 `;
 
 const server = Bun.serve({
@@ -90,27 +94,30 @@ const server = Bun.serve({
 		}
 
 		if (url.pathname === "/internal/logs") {
-			const mockLogs = `2026/01/29 06:36:23 In the last 1h0m0s, there were 28 completed successful connections. Traffic Relayed ↓ 198456 KB (55.13 KB/s), ↑ 38921 KB (10.81 KB/s).
-2026/01/29 18:36:39 NAT type: restricted
-2026/01/29 05:36:23 In the last 1h0m0s, there were 35 completed successful connections. Traffic Relayed ↓ 251032 KB (69.73 KB/s), ↑ 47852 KB (13.29 KB/s).
-2026/01/29 04:36:23 In the last 1h0m0s, there were 42 completed successful connections. Traffic Relayed ↓ 312847 KB (86.90 KB/s), ↑ 59234 KB (16.45 KB/s).
-2026/01/29 03:36:23 In the last 1h0m0s, there were 31 completed successful connections. Traffic Relayed ↓ 221543 KB (61.54 KB/s), ↑ 41876 KB (11.63 KB/s).
-2026/01/29 02:36:23 In the last 1h0m0s, there were 19 completed successful connections. Traffic Relayed ↓ 134219 KB (37.28 KB/s), ↑ 25183 KB (6.99 KB/s).
-2026/01/29 01:36:23 In the last 1h0m0s, there were 47 completed successful connections. Traffic Relayed ↓ 341876 KB (94.97 KB/s), ↑ 64392 KB (17.89 KB/s).
-2026/01/29 00:36:23 In the last 1h0m0s, there were 38 completed successful connections. Traffic Relayed ↓ 267543 KB (74.32 KB/s), ↑ 50124 KB (13.92 KB/s).
-2026/01/28 23:36:23 In the last 1h0m0s, there were 52 completed successful connections. Traffic Relayed ↓ 389234 KB (108.12 KB/s), ↑ 72841 KB (20.23 KB/s).
-2026/01/28 22:36:23 In the last 1h0m0s, there were 44 completed successful connections. Traffic Relayed ↓ 298712 KB (82.98 KB/s), ↑ 56234 KB (15.62 KB/s).
-2026/01/28 21:36:23 In the last 1h0m0s, there were 29 completed successful connections. Traffic Relayed ↓ 203487 KB (56.52 KB/s), ↑ 38291 KB (10.64 KB/s).
-2026/01/28 20:36:23 In the last 1h0m0s, there were 36 completed successful connections. Traffic Relayed ↓ 254098 KB (70.58 KB/s), ↑ 47659 KB (13.24 KB/s).
-2026/01/28 19:36:23 In the last 1h0m0s, there were 41 completed successful connections. Traffic Relayed ↓ 289543 KB (80.43 KB/s), ↑ 54327 KB (15.09 KB/s).
-2026/01/28 18:36:23 In the last 1h0m0s, there were 33 completed successful connections. Traffic Relayed ↓ 232109 KB (64.47 KB/s), ↑ 43652 KB (12.13 KB/s).
-2026/01/28 17:36:23 In the last 1h0m0s, there were 27 completed successful connections. Traffic Relayed ↓ 189321 KB (52.59 KB/s), ↑ 35614 KB (9.89 KB/s).
-2026/01/28 16:36:23 In the last 1h0m0s, there were 49 completed successful connections. Traffic Relayed ↓ 356712 KB (99.09 KB/s), ↑ 67089 KB (18.64 KB/s).
-2026/01/28 15:36:23 In the last 1h0m0s, there were 39 completed successful connections. Traffic Relayed ↓ 275432 KB (76.51 KB/s), ↑ 51743 KB (14.37 KB/s).
-2026/01/28 14:36:23 In the last 1h0m0s, there were 45 completed successful connections. Traffic Relayed ↓ 318765 KB (88.55 KB/s), ↑ 59876 KB (16.63 KB/s).
-2026/01/28 13:36:23 In the last 1h0m0s, there were 34 completed successful connections. Traffic Relayed ↓ 239654 KB (66.57 KB/s), ↑ 45021 KB (12.51 KB/s).
-2026/01/28 12:36:23 In the last 1h0m0s, there were 26 completed successful connections. Traffic Relayed ↓ 182347 KB (50.65 KB/s), ↑ 34298 KB (9.53 KB/s).
-2026/01/28 11:36:23 In the last 1h0m0s, there were 51 completed successful connections. Traffic Relayed ↓ 367891 KB (102.19 KB/s), ↑ 69123 KB (19.20 KB/s).`;
+			const mockLogs = `2026/01/29 19:36:17 In the last 1h0m0s, there were 150 completed successful connections. Traffic Relayed ↓ 358643 KB (99.62 KB/s), ↑ 87018 KB (24.17 KB/s).
+2026/01/29 20:36:17 In the last 1h0m0s, there were 137 completed successful connections. Traffic Relayed ↓ 705340 KB (195.93 KB/s), ↑ 137061 KB (38.07 KB/s).
+2026/01/29 21:36:17 In the last 1h0m0s, there were 101 completed successful connections. Traffic Relayed ↓ 489758 KB (136.04 KB/s), ↑ 106948 KB (29.71 KB/s).
+2026/01/29 22:36:17 In the last 1h0m0s, there were 34 completed successful connections. Traffic Relayed ↓ 571290 KB (158.69 KB/s), ↑ 113590 KB (31.55 KB/s).
+2026/01/29 23:36:17 In the last 1h0m0s, there were 31 completed successful connections. Traffic Relayed ↓ 565185 KB (157.00 KB/s), ↑ 43956 KB (12.21 KB/s).
+2026/01/30 00:36:17 In the last 1h0m0s, there were 8 completed successful connections. Traffic Relayed ↓ 209866 KB (58.30 KB/s), ↑ 86463 KB (24.02 KB/s).
+2026/01/30 01:36:17 In the last 1h0m0s, there were 6 completed successful connections. Traffic Relayed ↓ 150602 KB (41.83 KB/s), ↑ 72347 KB (20.10 KB/s).
+2026/01/30 02:36:17 In the last 1h0m0s, there were 5 completed successful connections. Traffic Relayed ↓ 111978 KB (31.11 KB/s), ↑ 62467 KB (17.35 KB/s).
+2026/01/30 03:36:17 In the last 1h0m0s, there were 8 completed successful connections. Traffic Relayed ↓ 66912 KB (18.59 KB/s), ↑ 50987 KB (14.16 KB/s).
+2026/01/30 04:36:17 In the last 1h0m0s, there were 11 completed successful connections. Traffic Relayed ↓ 307124 KB (85.31 KB/s), ↑ 39730 KB (11.04 KB/s).
+2026/01/30 05:36:17 In the last 1h0m0s, there were 18 completed successful connections. Traffic Relayed ↓ 219477 KB (60.97 KB/s), ↑ 23241 KB (6.46 KB/s).
+2026/01/30 06:36:17 In the last 1h0m0s, there were 13 completed successful connections. Traffic Relayed ↓ 483875 KB (134.41 KB/s), ↑ 52759 KB (14.66 KB/s).
+2026/01/30 07:36:17 In the last 1h0m0s, there were 18 completed successful connections. Traffic Relayed ↓ 608490 KB (169.03 KB/s), ↑ 75063 KB (20.85 KB/s).
+2026/01/30 08:36:17 In the last 1h0m0s, there were 22 completed successful connections. Traffic Relayed ↓ 585820 KB (162.73 KB/s), ↑ 95537 KB (26.54 KB/s).
+2026/01/30 09:41:59 In the last 1h0m0s, there were 51 completed successful connections. Traffic Relayed ↓ 528797 KB (146.89 KB/s), ↑ 90265 KB (25.07 KB/s).
+2026/01/30 10:41:59 In the last 1h0m0s, there were 31 completed successful connections. Traffic Relayed ↓ 585162 KB (162.54 KB/s), ↑ 92028 KB (25.56 KB/s).
+2026/01/30 11:41:59 In the last 1h0m0s, there were 97 completed successful connections. Traffic Relayed ↓ 287205 KB (79.78 KB/s), ↑ 64850 KB (18.01 KB/s).
+2026/01/30 12:41:59 In the last 1h0m0s, there were 105 completed successful connections. Traffic Relayed ↓ 154081 KB (42.80 KB/s), ↑ 34662 KB (9.63 KB/s).
+2026/01/30 13:41:59 In the last 1h0m0s, there were 54 completed successful connections. Traffic Relayed ↓ 330043 KB (91.68 KB/s), ↑ 58548 KB (16.26 KB/s).
+2026/01/30 14:41:59 In the last 1h0m0s, there were 61 completed successful connections. Traffic Relayed ↓ 283171 KB (78.66 KB/s), ↑ 51404 KB (14.28 KB/s).
+2026/01/30 15:41:59 In the last 1h0m0s, there were 75 completed successful connections. Traffic Relayed ↓ 232058 KB (64.46 KB/s), ↑ 58970 KB (16.38 KB/s).
+2026/01/30 16:41:59 In the last 1h0m0s, there were 95 completed successful connections. Traffic Relayed ↓ 283368 KB (78.71 KB/s), ↑ 82115 KB (22.81 KB/s).
+2026/01/30 17:41:59 In the last 1h0m0s, there were 126 completed successful connections. Traffic Relayed ↓ 251105 KB (69.75 KB/s), ↑ 74885 KB (20.80 KB/s).
+2026/01/30 18:41:59 In the last 1h0m0s, there were 110 completed successful connections. Traffic Relayed ↓ 291813 KB (81.06 KB/s), ↑ 64936 KB (18.04 KB/s).`;
 			return new Response(mockLogs, {
 				headers: { "Content-Type": "text/plain" },
 			});
