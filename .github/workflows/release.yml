@@ -49,6 +49,7 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
+          no-cache: true
           tags: |
             ghcr.io/lone-cloud/snowflake-dashboard:latest
             ghcr.io/lone-cloud/snowflake-dashboard:v${{ steps.version.outputs.VERSION }}
