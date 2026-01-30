@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snowflake Dashboard</title>
-    <meta http-equiv="refresh" content="60">
     <link rel="icon" type="image/svg+xml" href="favicon.svg" media="(prefers-color-scheme: light)">
     <link rel="icon" type="image/svg+xml" href="favicon-dark.svg" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="styles.css">
@@ -53,8 +52,8 @@
             
             <div class="stat">
                 <div class="label">Recent Activity (Hourly)</div>
-                <div id="activity-log" style="font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.8; margin-top: 15px;">
-                    <div style="color: var(--text-secondary);">Loading...</div>
+                <div id="activity-log">
+                    <div class="loading">Loading...</div>
                 </div>
             </div>
         </div>
@@ -128,7 +127,7 @@
                     .reverse();
                 
                 if (lines.length === 0) {
-                    logDiv.innerHTML = '<div style="color: var(--text-secondary);">No activity logs available</div>';
+                    logDiv.innerHTML = '<div class="loading">No activity logs available</div>';
                     return;
                 }
                 
@@ -149,17 +148,17 @@
                     </tr>`;
                 }).join('');
                 
-                logDiv.innerHTML = `<table style="width: 100%; margin-top: 10px; font-family: 'Courier New', monospace; font-size: 13px;">
-                    <tr style="color: var(--text-secondary); font-size: 11px; text-transform: uppercase;">
-                        <th style="text-align: left; padding: 8px 4px;">Time</th>
-                        <th style="text-align: left; padding: 8px 4px;">Conns</th>
-                        <th style="text-align: left; padding: 8px 4px;">Download</th>
-                        <th style="text-align: left; padding: 8px 4px;">Upload</th>
+                logDiv.innerHTML = `<table class="activity-table">
+                    <tr>
+                        <th>Time</th>
+                        <th>Conns</th>
+                        <th>Download</th>
+                        <th>Upload</th>
                     </tr>
                     ${rows}
                 </table>`;
             } catch (_e) {
-                document.getElementById('activity-log').innerHTML = '<div style="color: var(--error-color);">Error loading logs</div>';
+                document.getElementById('activity-log').innerHTML = '<div class="error">Error loading logs</div>';
             }
         }
 
@@ -198,7 +197,6 @@
                 let torOutbound = 0;
                 let memory = 0;
                 let startTime = 0;
-                let _goroutines = 0;
                 const countries = {};
                 
                 text.split('\n').forEach(line => {
@@ -231,16 +229,12 @@
                     } else if (line.startsWith('process_start_time_seconds')) {
                         const match = line.match(/(\d+\.?\d*e?\+?\d*)$/);
                         if (match) startTime = parseFloat(match[1]);
-                    } else if (line.startsWith('go_goroutines')) {
-                        const match = line.match(/(\d+\.?\d*e?\+?\d*)$/);
-                        if (match) _goroutines = parseFloat(match[1]);
                     }
                 });
                 
                 const attempts = total + timeouts;
                 const successRate = attempts > 0 ? ((total / attempts) * 100).toFixed(1) : 0;
                 const uptime = startTime > 0 ? Date.now() / 1000 - startTime : 0;
-                
                 
                 document.getElementById('total').textContent = total;
                 document.getElementById('timeouts').textContent = timeouts;

@@ -184,6 +184,35 @@ tr:last-child td {
 	gap: 20px;
 }
 
+#activity-log {
+	font-family: "Courier New", monospace;
+	font-size: 13px;
+	line-height: 1.8;
+	margin-top: 15px;
+}
+
+#activity-log .loading {
+	color: var(--text-secondary);
+}
+
+.activity-table {
+	width: 100%;
+	margin-top: 10px;
+	font-family: "Courier New", monospace;
+	font-size: 13px;
+}
+
+.activity-table tr {
+	color: var(--text-secondary);
+	font-size: 11px;
+	text-transform: uppercase;
+}
+
+.activity-table th {
+	text-align: left;
+	padding: 8px 4px;
+}
+
 @media (min-width: 769px) {
 	.grid-bottom {
 		height: var(--bottom-grid-height);
