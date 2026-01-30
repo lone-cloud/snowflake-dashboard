@@ -1,53 +1,81 @@
-const mockMetrics = `# HELP tor_snowflake_proxy_connections_total The total number of successful connections handled by the snowflake proxy
-# TYPE tor_snowflake_proxy_connections_total counter
-tor_snowflake_proxy_connections_total{country=""} 3
-tor_snowflake_proxy_connections_total{country="CI"} 1
-tor_snowflake_proxy_connections_total{country="ES"} 1
-tor_snowflake_proxy_connections_total{country="FR"} 1
-tor_snowflake_proxy_connections_total{country="GB"} 2
-tor_snowflake_proxy_connections_total{country="IR"} 9
-tor_snowflake_proxy_connections_total{country="IT"} 1
-tor_snowflake_proxy_connections_total{country="JP"} 1
-tor_snowflake_proxy_connections_total{country="KR"} 1
-tor_snowflake_proxy_connections_total{country="MA"} 1
-tor_snowflake_proxy_connections_total{country="MU"} 2
-tor_snowflake_proxy_connections_total{country="NG"} 2
-tor_snowflake_proxy_connections_total{country="PG"} 1
-tor_snowflake_proxy_connections_total{country="PT"} 1
-tor_snowflake_proxy_connections_total{country="RU"} 7
-tor_snowflake_proxy_connections_total{country="SG"} 1
-tor_snowflake_proxy_connections_total{country="TN"} 3
-tor_snowflake_proxy_connections_total{country="US"} 41
-# HELP tor_snowflake_proxy_connection_timeouts_total The total number of client connection attempts that failed after successful rendezvous
+const mockMetrics = `# HELP tor_snowflake_proxy_connection_timeouts_total The total number of client connection attempts that failed after successful rendezvous
 # TYPE tor_snowflake_proxy_connection_timeouts_total counter
-tor_snowflake_proxy_connection_timeouts_total 91
+tor_snowflake_proxy_connection_timeouts_total 603
+# HELP tor_snowflake_proxy_connections_total The total number of successful connections handled by the snowflake proxy
+# TYPE tor_snowflake_proxy_connections_total counter
+tor_snowflake_proxy_connections_total{country=""} 39
+tor_snowflake_proxy_connections_total{country="??"} 1
+tor_snowflake_proxy_connections_total{country="AE"} 4
+tor_snowflake_proxy_connections_total{country="AU"} 3
+tor_snowflake_proxy_connections_total{country="BF"} 2
+tor_snowflake_proxy_connections_total{country="BR"} 1
+tor_snowflake_proxy_connections_total{country="BY"} 1
+tor_snowflake_proxy_connections_total{country="CA"} 3
+tor_snowflake_proxy_connections_total{country="CH"} 2
+tor_snowflake_proxy_connections_total{country="CI"} 5
+tor_snowflake_proxy_connections_total{country="CM"} 1
+tor_snowflake_proxy_connections_total{country="CN"} 7
+tor_snowflake_proxy_connections_total{country="CV"} 1
+tor_snowflake_proxy_connections_total{country="DE"} 8
+tor_snowflake_proxy_connections_total{country="DK"} 2
+tor_snowflake_proxy_connections_total{country="EG"} 4
+tor_snowflake_proxy_connections_total{country="ES"} 5
+tor_snowflake_proxy_connections_total{country="FR"} 7
+tor_snowflake_proxy_connections_total{country="GA"} 1
+tor_snowflake_proxy_connections_total{country="GB"} 6
+tor_snowflake_proxy_connections_total{country="GM"} 1
+tor_snowflake_proxy_connections_total{country="IE"} 1
+tor_snowflake_proxy_connections_total{country="IN"} 2
+tor_snowflake_proxy_connections_total{country="IR"} 66
+tor_snowflake_proxy_connections_total{country="KE"} 2
+tor_snowflake_proxy_connections_total{country="LT"} 1
+tor_snowflake_proxy_connections_total{country="LY"} 1
+tor_snowflake_proxy_connections_total{country="MA"} 8
+tor_snowflake_proxy_connections_total{country="MU"} 26
+tor_snowflake_proxy_connections_total{country="MW"} 1
+tor_snowflake_proxy_connections_total{country="NG"} 5
+tor_snowflake_proxy_connections_total{country="NL"} 3
+tor_snowflake_proxy_connections_total{country="PL"} 2
+tor_snowflake_proxy_connections_total{country="RU"} 114
+tor_snowflake_proxy_connections_total{country="SD"} 3
+tor_snowflake_proxy_connections_total{country="SG"} 1
+tor_snowflake_proxy_connections_total{country="SO"} 1
+tor_snowflake_proxy_connections_total{country="TG"} 1
+tor_snowflake_proxy_connections_total{country="TM"} 3
+tor_snowflake_proxy_connections_total{country="TN"} 16
+tor_snowflake_proxy_connections_total{country="TZ"} 1
+tor_snowflake_proxy_connections_total{country="UA"} 2
+tor_snowflake_proxy_connections_total{country="UG"} 3
+tor_snowflake_proxy_connections_total{country="US"} 343
+tor_snowflake_proxy_connections_total{country="ZA"} 5
+tor_snowflake_proxy_connections_total{country="ZM"} 7
 # HELP tor_snowflake_proxy_traffic_inbound_bytes_total The total in bound traffic by the snowflake proxy (KB)
 # TYPE tor_snowflake_proxy_traffic_inbound_bytes_total counter
-tor_snowflake_proxy_traffic_inbound_bytes_total 490539
+tor_snowflake_proxy_traffic_inbound_bytes_total 2.93499e+06
 # HELP tor_snowflake_proxy_traffic_outbound_bytes_total The total out bound traffic by the snowflake proxy (KB)
 # TYPE tor_snowflake_proxy_traffic_outbound_bytes_total counter
-tor_snowflake_proxy_traffic_outbound_bytes_total 110937
+tor_snowflake_proxy_traffic_outbound_bytes_total 607727
 # HELP process_network_receive_bytes_total Number of bytes received by the process over the network
 # TYPE process_network_receive_bytes_total counter
-process_network_receive_bytes_total 1.78163309e+09
+process_network_receive_bytes_total 5.257260631e+09
 # HELP process_network_transmit_bytes_total Number of bytes sent by the process over the network
 # TYPE process_network_transmit_bytes_total counter
-process_network_transmit_bytes_total 1.780049424e+09
+process_network_transmit_bytes_total 5.290697185e+09
 # HELP process_resident_memory_bytes Resident memory size in bytes
 # TYPE process_resident_memory_bytes gauge
-process_resident_memory_bytes 9.8537472e+07
+process_resident_memory_bytes 1.01015552e+08
 # HELP process_start_time_seconds Start time of the process since unix epoch in seconds
 # TYPE process_start_time_seconds gauge
-process_start_time_seconds 1.7695821806e+09
+process_start_time_seconds 1.76976251641e+09
 # HELP go_goroutines Number of goroutines that currently exist
 # TYPE go_goroutines gauge
-go_goroutines 571
+go_goroutines 491
 # HELP process_open_fds Number of open file descriptors
 # TYPE process_open_fds gauge
-process_open_fds 65
+process_open_fds 50
 # HELP process_cpu_seconds_total Total user and system CPU time spent in seconds
 # TYPE process_cpu_seconds_total counter
-process_cpu_seconds_total 1395.02
+process_cpu_seconds_total 4483.53
 `;
 
 const server = Bun.serve({

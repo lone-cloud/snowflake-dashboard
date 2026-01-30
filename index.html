@@ -93,10 +93,14 @@
         function getCountryName(countryCode) {
             if (!countryCode || countryCode === 'Unknown') return 'Unknown';
             const normalized = String(countryCode).trim().toUpperCase();
-            if (!normalized) return 'Unknown';
+            if (!normalized || normalized.length !== 2) return 'Unknown';
 
-            const name = regionNames?.of(normalized);
-            return name || normalized;
+            try {
+                const name = regionNames?.of(normalized);
+                return name || normalized;
+            } catch {
+                return normalized;
+            }
         }
 
         function getFlag(countryCode) {
