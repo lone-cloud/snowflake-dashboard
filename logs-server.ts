@@ -4,43 +4,58 @@ Bun.serve({
 		const url = new URL(req.url);
 		const path = url.pathname;
 
-		const proc = Bun.spawn([
-			"docker",
-			"logs",
-			"--tail",
-			"500",
-			"snowflake-proxy",
-		]);
-		const output = await new Response(proc.stdout).text();
+		const socketPath = "/var/run/docker.sock";
+		const containerName = "snowflake-proxy";
 
-		if (path === "/internal/nat") {
-			const natMatch = output
-				.split("\n")
-				.reverse()
-				.map((line) => line.match(/\bNAT type:\s*([^\r\n]+)\s*$/))
-				.find(Boolean);
+		try {
+			const response = await fetch(
+				`http://localhost/containers/${containerName}/logs?stdout=true&stderr=true&tail=500`,
+				{
+					unix: socketPath,
+				},
+			);
 
-			const natType = natMatch?.[1]?.trim() || "Unknown";
-			return new Response(natType, {
+			if (!response.ok) {
+				throw new Error(`Docker API error: ${response.status}`);
+			}
+
+			const output = await response.text();
+
+			if (path === "/internal/nat") {
+				const natMatch = output
+					.split("\n")
+					.reverse()
+					.map((line) => line.match(/\bNAT type:\s*([^\r\n]+)\s*$/))
+					.find(Boolean);
+
+				const natType = natMatch?.[1]?.trim() || "Unknown";
+				return new Response(natType, {
+					headers: { "Content-Type": "text/plain" },
+				});
+			}
+
+			if (path === "/internal/logs" || path === "/") {
+				const logs = output
+					.split("\n")
+					.filter((line) => line.includes("In the last"))
+					.join("\n");
+
+				return new Response(logs, {
+					headers: { "Content-Type": "text/plain" },
+				});
+			}
+
+			return new Response("Not Found", {
+				status: 404,
+				headers: { "Content-Type": "text/plain" },
+			});
+		} catch (error) {
+			console.error("Failed to fetch logs:", error);
+			return new Response("Logs unavailable", {
+				status: 500,
 				headers: { "Content-Type": "text/plain" },
 			});
 		}
-
-		if (path === "/internal/logs" || path === "/") {
-			const logs = output
-				.split("\n")
-				.filter((line) => line.includes("In the last"))
-				.join("\n");
-
-			return new Response(logs, {
-				headers: { "Content-Type": "text/plain" },
-			});
-		}
-
-		return new Response("Not Found", {
-			status: 404,
-			headers: { "Content-Type": "text/plain" },
-		});
 	},
 });
 
