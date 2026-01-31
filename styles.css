@@ -35,7 +35,7 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 	max-width: 75rem;
 	margin: 0 auto;
-	padding: 1rem 2rem;
+	padding: 1rem;
 	background: var(--bg-primary);
 	color: var(--text-primary);
 }
@@ -48,6 +48,12 @@ body {
 
 .grid-top {
 	grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-top .stat {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .grid-bottom {
@@ -208,7 +214,6 @@ tr:last-child td {
 
 .activity-table {
 	width: 100%;
-	margin-top: 0.625rem;
 	font-family: "Courier New", monospace;
 	font-size: 0.8125rem;
 }
@@ -219,6 +224,21 @@ tr:last-child td {
 	text-transform: uppercase;
 	text-align: left;
 	padding: 0.5rem 0.25rem;
+}
+
+.activity-table td {
+	color: var(--text-primary);
+	font-weight: 600;
+	font-size: 0.875rem;
+}
+
+.activity-table .rate {
+	color: var(--text-secondary);
+	font-size: 0.75rem;
+}
+
+.activity-table tr:nth-child(even) {
+	background: var(--bg-hover);
 }
 
 @media (min-width: 769px) {
@@ -301,6 +321,10 @@ tr:last-child td {
 
 	.metric-row {
 		flex-wrap: nowrap;
+	}
+
+	.metric-row > span:last-child {
+		text-align: right;
 	}
 
 	#activity-log {
