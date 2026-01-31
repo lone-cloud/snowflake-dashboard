@@ -19,11 +19,6 @@ COPY favicon.svg /usr/share/nginx/html/favicon.svg
 COPY favicon-dark.svg /usr/share/nginx/html/favicon-dark.svg
 COPY --from=builder /app/server /app/server
 
-RUN echo '#!/bin/sh' > /start.sh && \
-    echo 'nginx' >> /start.sh && \
-    echo '/app/server' >> /start.sh && \
-    chmod +x /start.sh
-
 EXPOSE 8888
 
-CMD ["/start.sh"]
+CMD ["sh", "-c", "nginx && /app/server"]
