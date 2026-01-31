@@ -1,8 +1,8 @@
 FROM oven/bun:1.3.6-debian AS builder
 
 WORKDIR /app
-COPY logs-server.js .
-RUN bun build --compile logs-server.js --outfile server
+COPY logs-server.ts .
+RUN bun build --compile logs-server.ts --outfile server
 
 FROM debian:13.3-slim
 
