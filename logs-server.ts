@@ -5,7 +5,7 @@ Bun.serve({
 		const path = url.pathname;
 
 		const proc = Bun.spawn([
-			"/usr/bin/docker",
+			"docker",
 			"logs",
 			"--tail",
 			"500",

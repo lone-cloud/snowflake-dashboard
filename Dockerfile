@@ -4,7 +4,7 @@ WORKDIR /app
 COPY logs-server.ts .
 RUN bun build --compile logs-server.ts --outfile server
 
-FROM debian:13.3-slim
+FROM debian:13.3
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     nginx \
