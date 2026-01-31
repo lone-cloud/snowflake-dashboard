@@ -1,4 +1,4 @@
-FROM oven/bun:alpine
+FROM node:alpine
 
 RUN apk add --no-cache nginx docker-cli
 
@@ -11,7 +11,7 @@ COPY logs-server.js /app/logs-server.js
 
 RUN echo '#!/bin/sh' > /start.sh && \
     echo 'nginx' >> /start.sh && \
-    echo 'cd /app && bun logs-server.js' >> /start.sh && \
+    echo 'cd /app && node logs-server.js' >> /start.sh && \
     chmod +x /start.sh
 
 EXPOSE 8888
