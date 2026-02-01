@@ -115,7 +115,17 @@ func handleLogs(w http.ResponseWriter, _ *http.Request) {
 }
 
 func handleMetrics(w http.ResponseWriter, _ *http.Request) {
-	resp, err := http.Get("http://localhost:9999/internal/metrics")
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	req, err := http.NewRequestWithContext(ctx, "GET", "http://localhost:9999/internal/metrics", nil)
+	if err != nil {
+		log.Printf("Failed to create request: %v", err)
+		http.Error(w, "Metrics unavailable", 500)
+		return
+	}
+
+	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
 		log.Printf("Failed to fetch metrics: %v", err)
 		http.Error(w, "Metrics unavailable", 500)
