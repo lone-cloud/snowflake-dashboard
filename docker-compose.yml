@@ -1,7 +1,7 @@
 services:
   snowflake-dashboard:
     container_name: snowflake-dashboard
-    image: snowflake-dashboard:latest
+    image: ghcr.io/lone-cloud/snowflake-dashboard:latest
     restart: unless-stopped
     network_mode: host
     volumes:

@@ -13,4 +13,7 @@ docker:
 test:
 	go test -v ./...
 
-.PHONY: lint dev build docker test
+release:
+	gh workflow run release.yml
+
+.PHONY: lint dev build docker test release
