@@ -13,9 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Get version from package.json
+      - name: Get version from VERSION file
         id: version
-        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+        run: echo "VERSION=$(cat VERSION)" >> $GITHUB_OUTPUT
       
       - name: Create tag
         run: |

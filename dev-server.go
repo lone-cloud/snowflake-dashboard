@@ -1,3 +1,13 @@
+//go:build dev
+
+package main
+
+import (
+	"log"
+	"net/http"
+	"os"
+)
+
 const mockMetrics = `# HELP tor_snowflake_proxy_connection_timeouts_total The total number of client connection attempts that failed after successful rendezvous
 # TYPE tor_snowflake_proxy_connection_timeouts_total counter
 tor_snowflake_proxy_connection_timeouts_total 765
@@ -80,21 +90,9 @@ process_open_fds 47
 # HELP process_cpu_seconds_total Total user and system CPU time spent in seconds
 # TYPE process_cpu_seconds_total counter
 process_cpu_seconds_total 5244.22
-`;
+`
 
-const server = Bun.serve({
-	port: 3000,
-	async fetch(req) {
-		const url = new URL(req.url);
-
-		if (url.pathname === "/internal/metrics") {
-			return new Response(mockMetrics, {
-				headers: { "Content-Type": "text/plain" },
-			});
-		}
-
-		if (url.pathname === "/internal/logs") {
-			const mockLogs = `2026/01/29 19:36:17 In the last 1h0m0s, there were 150 completed successful connections. Traffic Relayed ↓ 358643 KB (99.62 KB/s), ↑ 87018 KB (24.17 KB/s).
+const mockLogs = `2026/01/29 19:36:17 In the last 1h0m0s, there were 150 completed successful connections. Traffic Relayed ↓ 358643 KB (99.62 KB/s), ↑ 87018 KB (24.17 KB/s).
 2026/01/29 20:36:17 In the last 1h0m0s, there were 137 completed successful connections. Traffic Relayed ↓ 705340 KB (195.93 KB/s), ↑ 137061 KB (38.07 KB/s).
 2026/01/29 21:36:17 In the last 1h0m0s, there were 101 completed successful connections. Traffic Relayed ↓ 489758 KB (136.04 KB/s), ↑ 106948 KB (29.71 KB/s).
 2026/01/29 22:36:17 In the last 1h0m0s, there were 34 completed successful connections. Traffic Relayed ↓ 571290 KB (158.69 KB/s), ↑ 113590 KB (31.55 KB/s).
@@ -117,27 +115,36 @@ const server = Bun.serve({
 2026/01/30 15:41:59 In the last 1h0m0s, there were 75 completed successful connections. Traffic Relayed ↓ 232058 KB (64.46 KB/s), ↑ 58970 KB (16.38 KB/s).
 2026/01/30 16:41:59 In the last 1h0m0s, there were 95 completed successful connections. Traffic Relayed ↓ 283368 KB (78.71 KB/s), ↑ 82115 KB (22.81 KB/s).
 2026/01/30 17:41:59 In the last 1h0m0s, there were 126 completed successful connections. Traffic Relayed ↓ 251105 KB (69.75 KB/s), ↑ 74885 KB (20.80 KB/s).
-2026/01/30 18:41:59 In the last 1h0m0s, there were 110 completed successful connections. Traffic Relayed ↓ 291813 KB (81.06 KB/s), ↑ 64936 KB (18.04 KB/s).`;
-			return new Response(mockLogs, {
-				headers: { "Content-Type": "text/plain" },
-			});
-		}
+2026/01/30 18:41:59 In the last 1h0m0s, there were 110 completed successful connections. Traffic Relayed ↓ 291813 KB (81.06 KB/s), ↑ 64936 KB (18.04 KB/s).`
 
-		if (url.pathname === "/internal/nat") {
-			return new Response("restricted", {
-				headers: { "Content-Type": "text/plain" },
-			});
-		}
+func main() {
+	// Serve static files
+	fs := http.FileServer(http.Dir("."))
+	http.Handle("/", fs)
 
-		const filePath = url.pathname === "/" ? "./index.html" : `.${url.pathname}`;
-		const file = Bun.file(filePath);
+	http.HandleFunc("/internal/metrics", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/plain")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Write([]byte(mockMetrics))
+	})
 
-		if (await file.exists()) {
-			return new Response(file);
-		}
+	http.HandleFunc("/internal/logs", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/plain")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Write([]byte(mockLogs))
+	})
 
-		return new Response("Not Found", { status: 404 });
-	},
-});
+	http.HandleFunc("/internal/nat", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/plain")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Write([]byte("restricted"))
+	})
 
-console.log(`Dev server running at http://localhost:${server.port}`);
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+
+	log.Printf("Dev server running at http://localhost:%s\n", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
+}

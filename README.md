@@ -2,7 +2,7 @@
 
 A simple [snowflake](https://snowflake.torproject.org/) dashboard to portray runtime metrics.
 
-The dashboard is build using data from snowflake's /internal/metrics endpoint to get the totals as well as its docker logs to get its hourly totals.
+The dashboard uses data from snowflake's /internal/metrics endpoint and docker logs to display hourly totals. Its Built with Go and Alpine Linux for minimal resource usage (~23MB image, ~3MB RAM).
 
 ## Light Mode
 
@@ -30,13 +30,4 @@ Open the dashboard in your browser:
 
 ```plaintext
 http://localhost:8888
-```
-
-## Updating
-
-Pull the latest image and restart:
-
-```bash
-docker compose pull
-docker compose up -d
 ```

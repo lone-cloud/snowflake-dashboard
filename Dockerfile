@@ -1,24 +1,20 @@
-FROM oven/bun:1.3.6-debian AS builder
+FROM golang:1.23-alpine AS builder
 
 WORKDIR /app
-COPY logs-server.ts .
-RUN bun build --compile logs-server.ts --outfile server
+COPY logs-server.go .
+RUN go build -ldflags="-s -w" -o server logs-server.go
 
-FROM debian:13.3
+FROM alpine:latest
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    nginx \
-    docker.io \
-    ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache ca-certificates
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=builder /app/server /app/server
 COPY index.html /usr/share/nginx/html/index.html
 COPY styles.css /usr/share/nginx/html/styles.css
+COPY script.js /usr/share/nginx/html/script.js
 COPY favicon.svg /usr/share/nginx/html/favicon.svg
 COPY favicon-dark.svg /usr/share/nginx/html/favicon-dark.svg
-COPY --from=builder /app/server /app/server
 
 EXPOSE 8888
 
-CMD ["sh", "-c", "nginx && /app/server"]
+CMD ["/app/server"]

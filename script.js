@@ -1,0 +1,204 @@
+function formatBytes(bytes) {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return `${parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
+}
+
+function formatUptime(seconds) {
+    const days = Math.floor(seconds / 86400);
+    const hours = Math.floor((seconds % 86400) / 3600);
+    const mins = Math.floor((seconds % 3600) / 60);
+    if (days > 0) return `${days}d ${hours}h`;
+    if (hours > 0) return `${hours}h ${mins}m`;
+    return `${mins}m`;
+}
+
+const regionNames = (typeof Intl !== 'undefined' && Intl.DisplayNames)
+    ? new Intl.DisplayNames([navigator.language || 'en'], { type: 'region' })
+    : null;
+
+function getCountryName(countryCode) {
+    if (!countryCode || countryCode === 'Unknown') return 'Unknown';
+    const normalized = String(countryCode).trim().toUpperCase();
+    if (!normalized || normalized.length !== 2) return 'Unknown';
+
+    try {
+        const name = regionNames?.of(normalized);
+        return name || normalized;
+    } catch {
+        return normalized;
+    }
+}
+
+function getFlag(countryCode) {
+    if (!countryCode || countryCode === 'Unknown') return '🌐';
+    const normalized = String(countryCode).trim().toUpperCase();
+    if (normalized.length !== 2) return '🌐';
+    const codePoints = normalized
+        .split('')
+        .map(char => 127397 + char.charCodeAt(0));
+    return String.fromCodePoint(...codePoints);
+}
+
+function formatKB(kbString) {
+    const kb = parseFloat(kbString);
+    if (kb >= 1024 * 1024) return `${(kb / 1024 / 1024).toFixed(2)} GB`;
+    if (kb >= 1024) return `${(kb / 1024).toFixed(2)} MB`;
+    return `${kb.toFixed(2)} KB`;
+}
+
+async function fetchLogs() {
+    try {
+        const response = await fetch('/internal/logs');
+        const text = await response.text();
+        
+        const logDiv = document.getElementById('activity-log');
+        const lines = text.split('\n')
+            .filter(line => line.includes('In the last'))
+            .reverse();
+        
+        if (lines.length === 0) {
+            logDiv.innerHTML = '<div class="loading">No activity logs available</div>';
+            return;
+        }
+        
+        const rows = lines.map(line => {
+            const match = line.match(/(\d{4}\/\d{2}\/\d{2} \d{2}:\d{2}:\d{2}).*?(\d+) completed.*?↓ ([\d.]+) KB \(([\d.]+) KB\/s\).*?↑ ([\d.]+) KB \(([\d.]+) KB\/s\)/);
+            if (!match) return '';
+            
+            const [, timestamp, connections, dlTotal, dlRate, ulTotal, ulRate] = match;
+            const utcDate = new Date(`${timestamp.replace(/\//g, '-')}Z`);
+            const time = utcDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const fullDate = utcDate.toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            
+            return `<tr>
+                <td title="${fullDate}">${time}</td>
+                <td>${connections}</td>
+                <td>${formatKB(dlTotal)} <span class="rate">(${formatKB(dlRate)}/s)</span></td>
+                <td>${formatKB(ulTotal)} <span class="rate">(${formatKB(ulRate)}/s)</span></td>
+            </tr>`;
+        }).join('');
+        
+        logDiv.innerHTML = `<table class="activity-table">
+            <tr>
+                <th>Time</th>
+                <th>Conns</th>
+                <th>Download</th>
+                <th>Upload</th>
+            </tr>
+            ${rows}
+        </table>`;
+    } catch (_e) {
+        document.getElementById('activity-log').innerHTML = '<div class="error">Error loading logs</div>';
+    }
+}
+
+async function fetchNatType() {
+    try {
+        const response = await fetch('/internal/nat');
+        const text = await response.text();
+        const natType = text.trim() || 'Unknown';
+        const el = document.getElementById('nat-type');
+        const row = document.getElementById('nat-row');
+
+        const isUnknown = !natType || natType.toLowerCase() === 'unknown';
+        if (row) row.hidden = isUnknown;
+        if (el && !isUnknown) {
+            const capitalized = natType.charAt(0).toUpperCase() + natType.slice(1).toLowerCase();
+            el.textContent = capitalized;
+        }
+    } catch (_e) {
+        const el = document.getElementById('nat-type');
+        const row = document.getElementById('nat-row');
+        if (row) row.hidden = false;
+        if (el) el.innerHTML = '<span class="error">Error</span>';
+    }
+}
+
+async function fetchStats() {
+    try {
+        const response = await fetch('/internal/metrics');
+        const text = await response.text();
+        
+        let total = 0;
+        let timeouts = 0;
+        let inbound = 0;
+        let outbound = 0;
+        let torInbound = 0;
+        let torOutbound = 0;
+        let memory = 0;
+        let startTime = 0;
+        const countries = {};
+        
+        text.split('\n').forEach(line => {
+            if (line.startsWith('tor_snowflake_proxy_connections_total')) {
+                const match = line.match(/country="([^"]*)".*?(\d+)$/);
+                if (match) {
+                    const country = match[1] || 'Unknown';
+                    const count = parseInt(match[2], 10);
+                    countries[country] = count;
+                    total += count;
+                }
+            } else if (line.startsWith('tor_snowflake_proxy_connection_timeouts_total')) {
+                const match = line.match(/(\d+)$/);
+                if (match) timeouts = parseInt(match[1], 10);
+            } else if (line.startsWith('process_network_receive_bytes_total')) {
+                const match = line.match(/(\d+\.?\d*e?\+?\d*)$/);
+                if (match) inbound = parseFloat(match[1]);
+            } else if (line.startsWith('process_network_transmit_bytes_total')) {
+                const match = line.match(/(\d+\.?\d*e?\+?\d*)$/);
+                if (match) outbound = parseFloat(match[1]);
+            } else if (line.startsWith('tor_snowflake_proxy_traffic_inbound_bytes_total')) {
+                const match = line.match(/(\d+\.?\d*e?\+?\d*)$/);
+                if (match) torInbound = parseFloat(match[1]) * 1024;
+            } else if (line.startsWith('tor_snowflake_proxy_traffic_outbound_bytes_total')) {
+                const match = line.match(/(\d+\.?\d*e?\+?\d*)$/);
+                if (match) torOutbound = parseFloat(match[1]) * 1024;
+            } else if (line.startsWith('process_resident_memory_bytes')) {
+                const match = line.match(/(\d+\.?\d*e?\+?\d*)$/);
+                if (match) memory = parseFloat(match[1]);
+            } else if (line.startsWith('process_start_time_seconds')) {
+                const match = line.match(/(\d+\.?\d*e?\+?\d*)$/);
+                if (match) startTime = parseFloat(match[1]);
+            }
+        });
+        
+        const attempts = total + timeouts;
+        const successRate = attempts > 0 ? ((total / attempts) * 100).toFixed(1) : 0;
+        const uptime = startTime > 0 ? Date.now() / 1000 - startTime : 0;
+        
+        document.getElementById('total').textContent = total;
+        document.getElementById('timeouts').textContent = timeouts;
+        document.getElementById('success-rate').textContent = `${successRate}%`;
+        document.getElementById('total-traffic').textContent = `${formatBytes(inbound)} / ${formatBytes(outbound)}`;
+        document.getElementById('tor-traffic').textContent = `${formatBytes(torInbound)} / ${formatBytes(torOutbound)}`;
+        document.getElementById('memory').textContent = formatBytes(memory);
+        document.getElementById('uptime').textContent = formatUptime(uptime);
+        
+        const table = document.getElementById('countries');
+        table.innerHTML = '<tr><th>Country</th><th>Count</th></tr>';
+        Object.entries(countries).sort((a, b) => b[1] - a[1]).forEach(([country, count]) => {
+            const row = table.insertRow();
+            const displayName = getCountryName(country);
+
+            const countryCell = row.insertCell(0);
+            const flagSpan = document.createElement('span');
+            flagSpan.className = 'flag';
+            flagSpan.textContent = getFlag(country);
+            countryCell.appendChild(flagSpan);
+            countryCell.appendChild(document.createTextNode(displayName));
+
+            row.insertCell(1).textContent = count;
+        });
+    } catch (_e) {
+        document.getElementById('total').innerHTML = '<span class="error">Error</span>';
+    }
+}
+
+fetchStats();
+fetchLogs();
+fetchNatType();
+setInterval(fetchStats, 300000);
+setInterval(fetchLogs, 300000);
