@@ -230,6 +230,7 @@ tr:last-child td {
 .activity-table .rate {
 	color: var(--text-secondary);
 	font-size: 0.75rem;
+	display: block;
 }
 
 .activity-table tr:nth-child(even) {
@@ -316,15 +317,11 @@ tr:last-child td {
 
 	.metric-row {
 		flex-wrap: nowrap;
+		gap: 1rem;
 	}
 
 	.metric-row > span:last-child {
 		text-align: right;
-	}
-
-	.activity-table .rate {
-		display: block;
-		margin-top: 0.25rem;
 	}
 
 	#activity-log {
