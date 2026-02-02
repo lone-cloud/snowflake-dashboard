@@ -9,28 +9,17 @@
     <link rel="stylesheet" href="styles.css?v=VERSION">
 </head>
 <body>
-    <div class="grid grid-top">
-        <div class="stat">
-            <div class="label">Total Connections</div>
-            <div class="big" id="total">-</div>
-        </div>
-        <div class="stat">
-            <div class="label">Connection Timeouts</div>
-            <div class="big" id="timeouts">-</div>
-        </div>
-        <div class="stat">
-            <div class="label">Success Rate</div>
-            <div class="big success-rate" id="success-rate">-</div>
-        </div>
-    </div>
-
     <div class="grid grid-bottom">
         <div class="left-column">
             <div class="stat">
                 <div class="label">Metrics</div>
                 <div class="metric-row">
-                    <span>Total Traffic In / Out</span>
-                    <span id="total-traffic">-</span>
+                    <span>Success Rate</span>
+                    <span class="success-rate" id="success-rate-small">-</span>
+                </div>
+                <div class="metric-row">
+                    <span>Uptime</span>
+                    <span id="uptime">-</span>
                 </div>
                 <div class="metric-row">
                     <span>Tor Relay In / Out</span>
@@ -41,29 +30,37 @@
                     <span id="nat-type">-</span>
                 </div>
                 <div class="metric-row">
-                    <span>Memory Usage</span>
-                    <span id="memory">-</span>
+                    <span>Total Connections</span>
+                    <span id="total">-</span>
                 </div>
                 <div class="metric-row">
-                    <span>Uptime</span>
-                    <span id="uptime">-</span>
+                    <span>Connection Timeouts</span>
+                    <span id="timeouts">-</span>
+                </div>
+                <div class="metric-row">
+                    <span>Total Traffic In / Out</span>
+                    <span id="total-traffic">-</span>
+                </div>
+                <div class="metric-row">
+                    <span>Memory Usage</span>
+                    <span id="memory">-</span>
                 </div>
             </div>
             
             <div class="stat">
-                <div class="label">Recent Activity (Hourly)</div>
-                <div id="activity-log">
-                    <div class="loading">Loading...</div>
+                <div class="label">Connections by Country</div>
+                <div class="table-scroll">
+                    <table id="countries">
+                        <tr><th>Country</th><th>Count</th><th>%</th></tr>
+                    </table>
                 </div>
             </div>
         </div>
         
         <div class="stat">
-            <div class="label">Connections by Country</div>
-            <div class="table-scroll">
-                <table id="countries">
-                    <tr><th>Country</th><th>Count</th></tr>
-                </table>
+            <div class="label">Recent Activity (Hourly)</div>
+            <div id="activity-log">
+                <div class="loading">Loading...</div>
             </div>
         </div>
     </div>

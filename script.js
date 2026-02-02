@@ -60,7 +60,7 @@ async function fetchLogs() {
             .reverse();
         
         if (lines.length === 0) {
-            logDiv.innerHTML = '<div class="loading">No activity logs available</div>';
+            logDiv.innerHTML = '<div class="loading">No activity yet. Check back soon!</div>';
             return;
         }
         
@@ -171,17 +171,18 @@ async function fetchStats() {
         
         document.getElementById('total').textContent = total;
         document.getElementById('timeouts').textContent = timeouts;
-        document.getElementById('success-rate').textContent = `${successRate}%`;
+        document.getElementById('success-rate-small').textContent = `${successRate}%`;
         document.getElementById('total-traffic').textContent = `${formatBytes(inbound)} / ${formatBytes(outbound)}`;
         document.getElementById('tor-traffic').textContent = `${formatBytes(torInbound)} / ${formatBytes(torOutbound)}`;
         document.getElementById('memory').textContent = formatBytes(memory);
         document.getElementById('uptime').textContent = formatUptime(uptime);
         
         const table = document.getElementById('countries');
-        table.innerHTML = '<tr><th>Country</th><th>Count</th></tr>';
+        table.innerHTML = '<tr><th>Country</th><th>Count</th><th>%</th></tr>';
         Object.entries(countries).sort((a, b) => b[1] - a[1]).forEach(([country, count]) => {
             const row = table.insertRow();
             const displayName = getCountryName(country);
+            const percentage = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
 
             const countryCell = row.insertCell(0);
             const flagSpan = document.createElement('span');
@@ -191,6 +192,7 @@ async function fetchStats() {
             countryCell.appendChild(document.createTextNode(displayName));
 
             row.insertCell(1).textContent = count;
+            row.insertCell(2).textContent = `${percentage}%`;
         });
     } catch (_e) {
         document.getElementById('total').innerHTML = '<span class="error">Error</span>';
