@@ -2,7 +2,8 @@ lint:
 	~/go/bin/golangci-lint run
 
 dev:
-	go run dev-server.go
+	@test -f ~/go/bin/air || (echo "Installing air..." && go install github.com/air-verse/air@latest)
+	~/go/bin/air
 
 build:
 	go build -ldflags="-s -w" -o server logs-server.go

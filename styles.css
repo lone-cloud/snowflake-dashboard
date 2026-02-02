@@ -64,7 +64,7 @@ body {
 
 .stat {
 	background: var(--bg-secondary);
-	padding: 1.875rem;
+	padding: 1rem 1.875rem;
 	border-radius: 0.75rem;
 	border: 1px solid var(--border-color);
 }
@@ -218,18 +218,15 @@ tr:last-child td {
 	font-size: 0.8125rem;
 }
 
-.activity-table th {
-	color: var(--text-secondary);
-	font-size: 0.6875rem;
-	text-transform: uppercase;
-	text-align: left;
-	padding: 0.5rem 0.25rem;
-}
-
 .activity-table td {
 	color: var(--text-primary);
 	font-weight: 600;
-	font-size: 0.875rem;
+	font-size: 0.9375rem;
+}
+
+.activity-table td:first-child {
+	color: var(--text-secondary);
+	font-weight: 400;
 }
 
 .activity-table .rate {
@@ -302,7 +299,7 @@ tr:last-child td {
 	}
 
 	.stat {
-		padding: 0.9375rem;
+		padding: 0.5rem 1rem;
 	}
 
 	.big {
@@ -325,6 +322,11 @@ tr:last-child td {
 
 	.metric-row > span:last-child {
 		text-align: right;
+	}
+
+	.activity-table .rate {
+		display: block;
+		margin-top: 0.25rem;
 	}
 
 	#activity-log {
