@@ -78,7 +78,7 @@ body {
 
 .label {
 	color: var(--text-secondary);
-	font-size: 0.875rem;
+	font-size: 1rem;
 	text-transform: uppercase;
 	letter-spacing: 0.0625em;
 	margin-bottom: 0.9375rem;
@@ -88,7 +88,7 @@ body {
 	display: grid;
 	grid-template-columns: minmax(auto, 11.25rem) auto;
 	gap: 5rem;
-	padding: 0.5em 0;
+	padding: 0.5rem 0;
 	border-bottom: 1px solid var(--border-color);
 }
 
@@ -214,8 +214,6 @@ tr:last-child td {
 
 .activity-table {
 	width: 100%;
-	font-family: "Courier New", monospace;
-	font-size: 0.8125rem;
 }
 
 .activity-table td {
