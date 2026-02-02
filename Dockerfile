@@ -1,8 +1,8 @@
 FROM golang:1.23-alpine AS builder
 
 WORKDIR /app
-COPY logs-server.go .
-RUN go build -ldflags="-s -w" -o server logs-server.go
+COPY dashboard-server.go .
+RUN go build -ldflags="-s -w" -o server dashboard-server.go
 
 FROM alpine:latest
 

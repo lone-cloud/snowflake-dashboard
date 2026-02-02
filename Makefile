@@ -6,7 +6,7 @@ dev:
 	~/go/bin/air
 
 build:
-	go build -ldflags="-s -w" -o server logs-server.go
+	go build -ldflags="-s -w" -o server dashboard-server.go
 
 docker:
 	docker build -t snowflake-dashboard:latest .
