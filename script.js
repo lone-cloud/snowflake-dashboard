@@ -51,7 +51,7 @@ function formatKB(kbString) {
 
 async function fetchLogs() {
     try {
-        const response = await fetch('/internal/logs');
+        const response = await fetch('/api/logs');
         const text = await response.text();
         
         const logDiv = document.getElementById('activity-log');
@@ -97,7 +97,7 @@ async function fetchLogs() {
 
 async function fetchNatType() {
     try {
-        const response = await fetch('/internal/nat');
+        const response = await fetch('/api/nat');
         const text = await response.text();
         const natType = text.trim() || 'Unknown';
         const el = document.getElementById('nat-type');
@@ -119,7 +119,7 @@ async function fetchNatType() {
 
 async function fetchStats() {
     try {
-        const response = await fetch('/internal/metrics');
+        const response = await fetch('/api/metrics');
         const text = await response.text();
         
         let total = 0;

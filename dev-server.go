@@ -118,25 +118,21 @@ const mockLogs = `2026/01/29 19:36:17 In the last 1h0m0s, there were 150 complet
 2026/01/30 18:41:59 In the last 1h0m0s, there were 110 completed successful connections. Traffic Relayed ↓ 291813 KB (81.06 KB/s), ↑ 64936 KB (18.04 KB/s).`
 
 func main() {
-	// Serve static files
 	fs := http.FileServer(http.Dir("."))
 	http.Handle("/", fs)
 
-	http.HandleFunc("/internal/metrics", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/metrics", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/plain")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Write([]byte(mockMetrics))
 	})
 
-	http.HandleFunc("/internal/logs", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/logs", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/plain")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Write([]byte(mockLogs))
 	})
 
-	http.HandleFunc("/internal/nat", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/nat", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/plain")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Write([]byte("restricted"))
 	})
 
