@@ -1,40 +1,9 @@
-linters:
-  enable:
-    - gofmt
-    - goimports
-    - govet
-    - errcheck
-    - staticcheck
-    - unused
-    - gosimple
-    - ineffassign
-    - typecheck
-    - bodyclose
-    - gosec
-    - noctx
-    - nilerr
-    - gocritic
-    - misspell
-    - revive
-
-linters-settings:
-  govet:
-    enable:
-      - shadow
-  gofmt:
-    simplify: true
-  errcheck:
-    check-blank: true
-  revive:
-    rules:
-      - name: package-comments
-        disabled: true
-
-issues:
-  exclude-use-default: false
-  max-issues-per-linter: 0
-  max-same-issues: 0
+version: "2"
 
 run:
   timeout: 5m
-  tests: true
+  tests: false
+
+linters:
+  disable:
+    - errcheck

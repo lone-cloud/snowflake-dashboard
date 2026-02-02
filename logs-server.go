@@ -60,7 +60,7 @@ func getDockerLogs() (string, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != 200 {
-		return "", fmt.Errorf("Docker API error: %d", resp.StatusCode)
+		return "", fmt.Errorf("docker API returned status %d", resp.StatusCode)
 	}
 
 	body, err := io.ReadAll(resp.Body)
