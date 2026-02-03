@@ -108,6 +108,15 @@ async function fetchNatType() {
         if (el && !isUnknown) {
             const capitalized = natType.charAt(0).toUpperCase() + natType.slice(1).toLowerCase();
             el.textContent = capitalized;
+            
+            const natLower = natType.toLowerCase();
+            if (natLower === 'unrestricted') {
+                el.title = 'Address-independent NAT mapping. Compatible with most other NATs and can connect to restricted proxies.';
+            } else if (natLower === 'restricted') {
+                el.title = 'Address-dependent NAT mapping. May have limited compatibility with other restricted NATs.';
+            } else if (natLower === 'unknown') {
+                el.title = 'NAT type could not be determined. Probe test may have failed or not completed yet.';
+            }
         }
     } catch (_e) {
         const el = document.getElementById('nat-type');

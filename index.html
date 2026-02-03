@@ -14,41 +14,41 @@
             <div class="stat">
                 <div class="label">Metrics</div>
                 <div class="metric-row">
-                    <span>Success Rate</span>
+                    <span title="Percentage of successful connections vs total attempts">Success Rate</span>
                     <span class="success-rate" id="success-rate-small">-</span>
                 </div>
                 <div class="metric-row">
-                    <span>Uptime</span>
+                    <span title="How long the Snowflake proxy has been running">Uptime</span>
                     <span id="uptime">-</span>
                 </div>
                 <div class="metric-row">
-                    <span>Relay ↓ / ↑ <span title="Data relayed from Tor to clients / from clients to Tor"><svg class="info-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="8" y="11.5" text-anchor="middle" font-size="10" font-weight="600">i</text></svg></span></span>
+                    <span title="Data relayed from Tor to clients / from clients to Tor">Relay ↓ / ↑</span>
                     <span id="tor-traffic">-</span>
                 </div>
                 <div class="metric-row" id="nat-row" hidden>
-                    <span>NAT Type <span title="Your network's NAT configuration"><svg class="info-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="8" y="11.5" text-anchor="middle" font-size="10" font-weight="600">i</text></svg></span></span>
+                    <span title="Your network's NAT configuration - determines proxy compatibility">NAT Type</span>
                     <span id="nat-type">-</span>
                 </div>
                 <div class="metric-row">
-                    <span>Connections <span title="Successful client connections completed"><svg class="info-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="8" y="11.5" text-anchor="middle" font-size="10" font-weight="600">i</text></svg></span></span>
+                    <span title="Successful client connections completed">Connections</span>
                     <span id="total">-</span>
                 </div>
                 <div class="metric-row">
-                    <span>Timeouts <span title="Connection attempts that failed after rendezvous"><svg class="info-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="8" y="11.5" text-anchor="middle" font-size="10" font-weight="600">i</text></svg></span></span>
+                    <span title="Connection attempts that failed or timed out">Timeouts</span>
                     <span id="timeouts">-</span>
                 </div>
                 <div class="metric-row">
-                    <span>Traffic ↓ / ↑ <span title="Total proxy network traffic received / sent"><svg class="info-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="8" y="11.5" text-anchor="middle" font-size="10" font-weight="600">i</text></svg></span></span>
+                    <span title="Total proxy network traffic received / sent">Traffic ↓ / ↑</span>
                     <span id="total-traffic">-</span>
                 </div>
                 <div class="metric-row">
-                    <span>Memory Usage</span>
+                    <span title="Current memory consumption of the proxy process">Memory Usage</span>
                     <span id="memory">-</span>
                 </div>
             </div>
             
             <div class="stat">
-                <div class="label">Connections by Country <span title="Successful connections by client country."><svg class="info-icon" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><text x="8" y="11.5" text-anchor="middle" font-size="10" font-weight="600">i</text></svg></span></div>
+                <div class="label">Connections by Country</div>
                 <div class="table-scroll">
                     <table id="countries">
                         <tr><th>Country</th><th>Count</th><th>%</th></tr>
