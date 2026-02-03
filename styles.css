@@ -82,6 +82,17 @@ body {
 	letter-spacing: 0.03125em;
 }
 
+.info-icon {
+	display: inline-block;
+	margin-left: 0.25rem;
+	color: var(--accent-color);
+	opacity: 0.7;
+	width: 0.875rem;
+	height: 0.875rem;
+	vertical-align: middle;
+	cursor: help;
+}
+
 .metric-row > span:last-child {
 	font-weight: 600;
 	font-size: 0.9375rem;
@@ -148,6 +159,7 @@ td {
 	padding: 0.75rem;
 	text-align: left;
 	border-bottom: 1px solid var(--border-color);
+	font-size: 0.9375rem;
 }
 
 th {
@@ -317,6 +329,10 @@ tr:last-child td {
 		margin-bottom: 0.625rem;
 	}
 
+	.info-icon {
+		display: none;
+	}
+
 	th,
 	td {
 		padding: 0.5rem 0.25rem;
@@ -348,7 +364,7 @@ tr:last-child td {
 	}
 
 	#activity-log {
-		max-height: clamp(30vh, 35vh, 45vh);
+		max-height: clamp(50vh, 60vh, 70vh);
 	}
 
 	.table-scroll {
