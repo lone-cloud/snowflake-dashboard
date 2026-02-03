@@ -3,7 +3,7 @@
 	--bg-secondary: #161b22;
 	--bg-hover: #1c2128;
 	--text-primary: #c9d1d9;
-	--text-secondary: #8b949e;
+	--text-secondary: #a8b3c0;
 	--border-color: #30363d;
 	--accent-color: #58a6ff;
 	--success-color: #3fb950;
@@ -325,8 +325,8 @@ tr:last-child td {
 	}
 
 	.label {
-		font-size: 0.75rem;
-		margin-bottom: 0.625rem;
+		font-size: 0.9375rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.info-icon {
