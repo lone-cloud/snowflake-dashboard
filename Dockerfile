@@ -11,7 +11,7 @@ RUN apk add --no-cache ca-certificates
 COPY --from=builder /app/server /app/server
 COPY index.html /tmp/index.html
 COPY styles.css /app/static/styles.css
-COPY script.js /app/static/script.js
+COPY dashboard.js /app/static/dashboard.js
 COPY favicon.svg /app/static/favicon.svg
 COPY favicon-dark.svg /app/static/favicon-dark.svg
 COPY VERSION /tmp/VERSION
