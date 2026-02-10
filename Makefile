@@ -1,6 +1,11 @@
 lint:
 	~/go/bin/golangci-lint run
 
+fix:
+	gofmt -s -w .
+	~/go/bin/golangci-lint run --fix
+	npx @biomejs/biome@latest check --write --unsafe .
+
 dev:
 	@test -f ~/go/bin/air || (echo "Installing air..." && go install github.com/air-verse/air@latest)
 	~/go/bin/air
@@ -17,4 +22,4 @@ test:
 release:
 	gh workflow run release.yml
 
-.PHONY: lint dev build docker test release
+.PHONY: lint fix check dev build docker test release

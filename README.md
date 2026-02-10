@@ -1,6 +1,6 @@
 # Snowflake Dashboard
 
-A simple [snowflake](https://snowflake.torproject.org/) dashboard to portray runtime metrics.
+A simple [snowflake](https://snowflake.torproject.org/) dashboard to portray runtime metrics. Both qumulative and hourly metrics are displayed.
 
 The dashboard uses data from snowflake's /internal/metrics endpoint and docker logs to display hourly totals. Its Built with Go and Alpine Linux for minimal resource usage (~23MB image, ~3MB RAM).
 

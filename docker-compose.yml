@@ -14,4 +14,15 @@ services:
     image: containers.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake:latest
     restart: unless-stopped
     network_mode: host
+    # For a full list of Snowflake Proxy CLI parameters see
+    # https://gitlab.torproject.org/tpo/anti-censorship/pluggable-transports/snowflake/-/tree/main/proxy?ref_type=heads#running-a-standalone-snowflake-proxy
     command: ["-metrics", "-metrics-address", "0.0.0.0", "-metrics-port", "9999"]
+    # Optionally limit ephemeral port range for firewall rules:
+    # command: ["-metrics", "-metrics-address", "0.0.0.0", "-metrics-port", "9999", "-ephemeral-ports-range", "30000:60000"]
+
+  watchtower:
+    container_name: watchtower
+    image: nickfedor/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: snowflake-proxy snowflake-dashboard

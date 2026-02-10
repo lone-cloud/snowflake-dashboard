@@ -19,3 +19,6 @@ jobs:
         uses: golangci/golangci-lint-action@v7
         with:
           version: latest
+      
+      - name: Run Biome
+        run: npx @biomejs/biome@latest check .

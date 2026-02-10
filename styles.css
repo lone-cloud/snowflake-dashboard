@@ -336,7 +336,8 @@ tr:last-child td {
 	.activity-table td {
 		font-size: 0.9375rem;
 		font-weight: 600;
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+		font-family:
+			-apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 	}
 
 	.activity-table td:first-child {
