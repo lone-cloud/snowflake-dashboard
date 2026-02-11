@@ -22,7 +22,8 @@ services:
 
   watchtower:
     container_name: watchtower
-    image: nickfedor/watchtower
+    image: nickfedor/watchtower:latest
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: snowflake-proxy snowflake-dashboard
